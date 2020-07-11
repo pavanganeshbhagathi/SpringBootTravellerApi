@@ -27,8 +27,18 @@ public interface PlaceRepository extends JpaRepository<Places, Long> {
 
 	List<Places> findByRating(int rating);
 
-	
-
 	List<Places> findByPlacePackageBetween(double start, double end);
+
+//	List<Places> findByPlaceTypeAndPlaceSubType(String placeType, String placeSubType);
+
+//	List<Places> findByPlacePackageBetweenAndPlaceType(double start, double end,String name);
+
+	List<Places> findByPlaceTypeAndPlaceSubtype(String placeType, String placeSubtype);
+
+	List<Places> findByPlaceTypeAndPlaceSeason(String placeType, String placeSeason);
+
+	List<Places> findByPlaceTypeAndRating(String placeType, int rating);
+
+	List<Places> findByPlaceTypeAndPlacePackageBetween(String placeTypename, double start, double end);
 
 }

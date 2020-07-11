@@ -18,6 +18,8 @@ public class Traveller {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Traveller.class, args);
+		
+		
 	}
 
 }

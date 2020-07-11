@@ -1,6 +1,7 @@
 package com.traveller.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -32,6 +33,9 @@ public class PlacesService {
     
     public List<Places> getPlaces() {
         return placeRepository.findAll();
+    }
+    public Optional<Places> getPlaceById(Long id) {
+        return placeRepository.findById(id);
     }
     
 
@@ -82,7 +86,27 @@ public class PlacesService {
     {
     	return placeRepository.findByPlacePackageBetween(start,end);
     }
-    
+   /* public List<Places> getplacePackageBetweenbyPlaceType(double start,double end)
+    {
+    	return placeRepository.findByPlacePackageBetweenANDPlaceType(start,end);
+    }*/
 
+    public List<Places> getPlaceTypeAndPlaceSubtype(String placeType,String placeSubtype)
+    {
+    	return placeRepository.findByPlaceTypeAndPlaceSubtype(placeType,placeSubtype);
+    }
     
+    public List<Places> getplaceTypeANDplaceSeason(String placeType,String placeSeason)
+    {
+    	return placeRepository.findByPlaceTypeAndPlaceSeason(placeType,placeSeason);
+    }
+    
+    public List<Places> getplaceTypeANDplaceRating(String placeType,int rating)
+    {
+    	return placeRepository.findByPlaceTypeAndRating(placeType,rating);
+    }
+    public List<Places> getplaceTypeBetweenplaceRating(String placeTypename,double start,double end)
+    {
+    	return placeRepository.findByPlaceTypeAndPlacePackageBetween(placeTypename,start,end);
+    }
 }

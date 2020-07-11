@@ -1,12 +1,14 @@
 package com.traveller.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.traveller.model.Places;
 import com.traveller.service.PlacesService;
 
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(path="/places")
 public class PlaceController {
@@ -24,10 +28,6 @@ public class PlaceController {
   @Autowired	
   private PlacesService placeService;
 
-  
-
-
-	
 
    @PostMapping(path="/createPlaces")
 	public ResponseEntity<Places>  saveCrop(@Valid @RequestBody Places places)
@@ -51,6 +51,15 @@ public class PlaceController {
 		List<Places> places = placeService.getPlaces();
 		
 		return new ResponseEntity<List<Places>>(places, HttpStatus.OK);
+		
+	}
+	
+	@GetMapping(path="/retrivePlaces/PlaceById{placeId}")
+	public ResponseEntity< Optional<Places>> getPlaceById(@PathVariable Long placeId)
+	{
+		  Optional<Places> placeById = placeService.getPlaceById(placeId);
+		
+		return new ResponseEntity< Optional<Places>>(placeById, HttpStatus.OK);
 		
 	}
 	@GetMapping(path="/retrivePlaces/{placeName}")
@@ -101,8 +110,8 @@ public class PlaceController {
 		
 	}
 	
-	@GetMapping(path="/retriveBySeason")
-	public ResponseEntity<List<Places>> getplaceSeason(String season)
+	@GetMapping(path="/retriveBySeason/{season}")
+	public ResponseEntity<List<Places>> getplaceSeason(@PathVariable String season)
 	{
      List<Places> getplaceSeason = placeService.getplaceSeason(season);
 		
@@ -135,6 +144,42 @@ public class PlaceController {
 		return new ResponseEntity<List<Places>>(getplacePackageBetween, HttpStatus.OK);
 		
 	}
+	
+	@GetMapping(path="/retrivebetweenPackage/PlaceType/{placeType}/start/{start}/between/end/{end}")
+	public ResponseEntity<List<Places>> getplaceTypeAndplacePackageBetween(@PathVariable String placeType,@PathVariable double start, @PathVariable double end)
+	{
+        
+		List<Places> getplaceTypeBetweenplaceRating = placeService.getplaceTypeBetweenplaceRating(placeType, start, end);
+		return new ResponseEntity<List<Places>>(getplaceTypeBetweenplaceRating, HttpStatus.OK);
+		
+	}
+	@GetMapping(path="/placeTypeAndPlaceSubType/PlaceType/{placeType}/placeSubtype/{placeSubtype}")
+	public ResponseEntity<List<Places>> getplaceTypeAndPlaceSubType(@PathVariable String placeType,@PathVariable String placeSubtype)
+	{
+        
+	   List<Places> getplaceTypeANDplaceSubType = placeService.getPlaceTypeAndPlaceSubtype(placeType, placeSubtype);
+		return new ResponseEntity<List<Places>>( getplaceTypeANDplaceSubType , HttpStatus.OK);
+		
+	}
+	
+	@GetMapping(path="/placeTypeAndPlaceSubType/PlaceType/{placetype}/PlaceSeason/{placeseason}")
+	public ResponseEntity<List<Places>> getplaceTypeAndPlaceSeason(@PathVariable String placetype,@PathVariable String placeseason)
+	{
+        
+	  List<Places> getplaceTypeANDplaceSeason = placeService.getplaceTypeANDplaceSeason(placetype, placeseason);
+		return new ResponseEntity<List<Places>>( getplaceTypeANDplaceSeason , HttpStatus.OK);
+		
+	}
+	
+	@GetMapping(path="/placeTypeAndPlaceSubType/PlaceType/{placeType}/PlaceRating/{placeRating}")
+	public ResponseEntity<List<Places>> getplaceTypeAndPlaceRating(@PathVariable String placeType,@PathVariable int placeRating)
+	{
+        
+	  List<Places> getplaceTypeANDplaceRating = placeService.getplaceTypeANDplaceRating(placeType, placeRating);
+		return new ResponseEntity<List<Places>>( getplaceTypeANDplaceRating , HttpStatus.OK);
+		
+	}
+	
 	
 	
 	
