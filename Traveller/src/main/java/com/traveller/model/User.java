@@ -40,6 +40,6 @@ public class User {
 	private String userPassword;
 	
 
-	@OneToMany(targetEntity = Booking.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user",orphanRemoval = true)
-	private List<Booking> order;
+//	@OneToMany(targetEntity = Booking.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user",orphanRemoval = true)
+//	private List<Booking> order;
 }

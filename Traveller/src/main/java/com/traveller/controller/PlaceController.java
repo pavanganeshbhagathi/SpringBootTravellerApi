@@ -20,9 +20,10 @@ import com.traveller.model.Places;
 import com.traveller.service.PlacesService;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+
 @RestController
 @RequestMapping(path="/places")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PlaceController {
 
   @Autowired	
@@ -30,7 +31,7 @@ public class PlaceController {
 
 
    @PostMapping(path="/createPlaces")
-	public ResponseEntity<Places>  saveCrop(@Valid @RequestBody Places places)
+	public ResponseEntity<Places>  savePlace(@Valid @RequestBody Places places)
 	{
 	  
       Places savePlace2 = placeService.savePlace(places);
@@ -39,14 +40,14 @@ public class PlaceController {
 	}
 	
 	@PostMapping(path="/createMultiplePlaces")
-	public ResponseEntity<List<Places>> SaveCrops(@Valid @RequestBody List<Places> places)
+	public ResponseEntity<List<Places>> SavePlaces(@Valid @RequestBody List<Places> places)
 	{
 		List<Places> savePlaces = placeService.savePlaces(places);
 		return new ResponseEntity<List<Places>>(savePlaces, HttpStatus.CREATED);
 	}
 	
 	@GetMapping(path="/retrivePlaces")
-	public ResponseEntity<List<Places>> getCrops()
+	public ResponseEntity<List<Places>> getPlaces()
 	{
 		List<Places> places = placeService.getPlaces();
 		
@@ -54,7 +55,7 @@ public class PlaceController {
 		
 	}
 	
-	@GetMapping(path="/retrivePlaces/PlaceById{placeId}")
+	@GetMapping(path="/retrivePlaces/PlaceById/{placeId}")
 	public ResponseEntity< Optional<Places>> getPlaceById(@PathVariable Long placeId)
 	{
 		  Optional<Places> placeById = placeService.getPlaceById(placeId);

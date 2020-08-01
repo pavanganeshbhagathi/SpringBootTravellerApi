@@ -16,7 +16,7 @@ public class BookingService {
    @Autowired
   private BookingRepository bookingRepository;
    @Transactional
-   public Booking savePlace(Booking booking) {
+   public Booking saveBooking(Booking booking) {
        return bookingRepository.save(booking);
    }
    

@@ -42,10 +42,10 @@ public class Places {
 	private  String placeSeason;
 
 	
-	private  String placeLongitude;
+	private  Double placeLongitude;
 	
 	
-	private  String placeLatitude;
+	private  Double  placeLatitude;
 	
 	
 	private String  placeDescription;

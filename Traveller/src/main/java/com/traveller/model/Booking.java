@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -37,11 +38,15 @@ public class Booking {
 	
 	private String bookingPlace;
 	
-	private int bookingorderPrice;
+	private Double bookingorderPrice;
 	
-	@UpdateTimestamp
+	@CreationTimestamp
 	private LocalDate orderDate;
 	
-	@ManyToOne(targetEntity = User.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private User user;
+	private  String userEmail;
+	
+	private String username;
+	
+//	@ManyToOne(targetEntity = User.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	private User user;
 }
